@@ -1,0 +1,6 @@
+# Editor / OS
+.DS_Store
+Thumbs.db
+
+# Claude Code session + memory (do not publish)
+.claude/

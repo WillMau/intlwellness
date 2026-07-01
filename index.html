@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Mark JS as available so the hero can hide its letters before animating
+       (no-JS users skip the intro and see the final layout). -->
+  <script>document.documentElement.className += " js";</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTL Wellness · A Coaching Experience for the Whole Self</title>
+  <meta name="description" content="INTL Wellness is a members-only coaching experience bringing movement, stillness, nourishment, and mind together under one roof. Now accepting founding members." />
+
+  <!-- Social preview -->
+  <meta property="og:title" content="INTL Wellness · A Coaching Experience for the Whole Self" />
+  <meta property="og:description" content="A coaching experience for the whole self: movement, stillness, nourishment, and mind, together under one roof. Join the founding member waitlist." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts: Fraunces (editorial display serif) + Inter (humanist sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Film-grain texture overlay (sits above everything, pointer-events none) -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ───────────────────────────  NAV  ─────────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="wordmark" aria-label="INTL Wellness home">
+        <span class="wordmark__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+            <path d="M2 12c3.5 0 3.5 3 7 3s3.5-3 7-3 3.5 3 7 3 3.5-3 7-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M2 19c3.5 0 3.5 3 7 3s3.5-3 7-3 3.5 3 7 3 3.5-3 7-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </span>
+        <span class="wordmark__text">INTL&nbsp;Wellness</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#ethos">Ethos</a>
+        <a href="#mirror">The Question</a>
+        <a href="#week">The Week</a>
+        <a href="#care">Care</a>
+        <a href="#membership">Membership</a>
+      </nav>
+
+      <a href="#waitlist" class="btn btn--pill nav__cta">Join the waitlist</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ───────────────────────────  HERO  ─────────────────────────── -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero__art" aria-hidden="true">
+        <div class="caustics"></div>
+        <svg class="hero__waves" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+          <path class="wave wave--1" d="M0,420 C240,360 480,480 720,440 C960,400 1200,500 1440,440 L1440,600 L0,600 Z"/>
+          <path class="wave wave--2" d="M0,470 C260,430 460,540 720,490 C980,440 1180,540 1440,500 L1440,600 L0,600 Z"/>
+          <path class="wave wave--3" d="M0,520 C240,500 520,560 720,540 C920,520 1220,560 1440,540 L1440,600 L0,600 Z"/>
+        </svg>
+      </div>
+
+      <div class="hero__content container">
+        <p class="eyebrow reveal" data-reveal>Now accepting founding members</p>
+        <p class="ac-prompt reveal" data-reveal data-delay="1">When you look in the mirror&hellip;</p>
+        <!-- ┌──────────────────────────────────────────────────────────────┐
+             │  INTL acronym hero — the brand concept made visible.           │
+             │  On load it animates:                                          │
+             │    "INTL Wellness" (horizontal) → "Wellness" fades →            │
+             │    INTL drops into a column → the rows CYCLE through answers    │
+             │    (struggle → who you become) and rest on the last set.       │
+             │                                                                │
+             │  The words you SEE are the cycling sets in main.js (the        │
+             │  `SETS` array). The text below is just the resting/no-JS        │
+             │  fallback — keep it matching the LAST set in main.js, and       │
+             │  keep each leading .ac-letter span so I·N·T·L stay aligned.     │
+             └──────────────────────────────────────────────────────────────┘ -->
+        <h1 class="hero__title acronym" aria-label="INTL Wellness">
+          <span class="ac-line"><span class="ac-letter">I</span><span class="ac-word">ntentional</span></span>
+          <span class="ac-line"><span class="ac-letter">N</span><span class="ac-word">ourished</span></span>
+          <span class="ac-line"><span class="ac-letter">T</span><span class="ac-word">ransformed</span></span>
+          <span class="ac-line"><span class="ac-letter">L</span><span class="ac-word">imitless</span></span>
+          <span class="ac-wellness" aria-hidden="true">Wellness</span>
+        </h1>
+        <p class="hero__lede reveal" data-reveal data-delay="2">
+          <strong>INTL</strong> is the question. <strong>Wellness</strong> is the answer.
+          A coaching experience built to change what you see.
+        </p>
+        <div class="hero__actions reveal" data-reveal data-delay="3">
+          <a href="#waitlist" class="btn btn--solid">Reserve your place</a>
+          <a href="#week" class="btn btn--ghost">See a week inside →</a>
+        </div>
+      </div>
+
+      <a href="#ethos" class="hero__scroll" aria-label="Scroll down">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ───────────────────────────  ETHOS  ─────────────────────────── -->
+    <section class="ethos section" id="ethos">
+      <div class="container ethos__grid">
+        <p class="section-label reveal" data-reveal>The idea</p>
+        <h2 class="ethos__statement">
+          <span class="reveal" data-reveal>Wellness was never meant to live in</span>
+          <span class="reveal" data-reveal data-delay="1">ten different apps and five different buildings.</span>
+          <span class="reveal" data-reveal data-delay="2">We brought it back to <em>one calm place.</em></span>
+        </h2>
+        <p class="ethos__body reveal" data-reveal data-delay="3">
+          Most people don't fail at being well because they lack willpower. They fail
+          because the support is scattered: a gym here, a therapist there, a nutrition
+          app that nags. INTL Wellness closes the gap. Your training, your stillness practice,
+          your coaching, and your care team share the same hallway and the same notes on you.
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  MIRROR — "What do you see?"  ─────────────────────────── -->
+    <section class="mirror section" id="mirror">
+      <div class="mirror__art" aria-hidden="true"><div class="caustics caustics--soft"></div></div>
+      <div class="container mirror__inner">
+        <p class="section-label reveal" data-reveal>The question</p>
+        <h2 class="section-title section-title--light mirror__title reveal" data-reveal data-delay="1">
+          Look in the mirror.<br />What do you see?
+        </h2>
+        <p class="mirror__intro reveal" data-reveal data-delay="2">
+          Most of us answer in the negative. Someone overworked. Someone who can't
+          lose the weight. Someone running on empty, who needs help but never asks.
+          Those four letters are the question you answer every morning.
+          Here is the other answer.
+        </p>
+
+        <!-- Each row reads as the initial + a word that flips from the struggle
+             to who you become. Hover (or it auto-alternates) to see the turn.
+             Edit the two words per row inside .m-neg / .m-pos. -->
+        <ul class="mirror__list" id="mirrorList">
+          <li class="mirror__row reveal" data-reveal tabindex="0">
+            <span class="m-letter">I</span>
+            <span class="m-stack"><span class="m-neg">gnored</span><span class="m-pos">ntentional</span></span>
+          </li>
+          <li class="mirror__row reveal" data-reveal data-delay="1" tabindex="0">
+            <span class="m-letter">N</span>
+            <span class="m-stack"><span class="m-neg">umb</span><span class="m-pos">ourished</span></span>
+          </li>
+          <li class="mirror__row reveal" data-reveal data-delay="2" tabindex="0">
+            <span class="m-letter">T</span>
+            <span class="m-stack"><span class="m-neg">ired</span><span class="m-pos">ransformed</span></span>
+          </li>
+          <li class="mirror__row reveal" data-reveal data-delay="3" tabindex="0">
+            <span class="m-letter">L</span>
+            <span class="m-stack"><span class="m-neg">ost</span><span class="m-pos">imitless</span></span>
+          </li>
+        </ul>
+
+        <div class="mirror__close reveal" data-reveal>
+          <p><strong>INTL</strong> is the question. <strong>Wellness</strong> is the answer.</p>
+          <a href="#waitlist" class="btn btn--solid">Change what you see</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  THE WEEK  ─────────────────────────── -->
+    <section class="week section" id="week">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label reveal" data-reveal>A week at INTL Wellness</p>
+          <h2 class="section-title reveal" data-reveal data-delay="1">
+            A rhythm, not a to-do list.
+          </h2>
+          <p class="section-intro reveal" data-reveal data-delay="2">
+            Four guided 30-minute sessions a week, an hour of coaching every other week,
+            and a care team you can reach in between. Around four and a half hours that
+            quietly reorganize the other one hundred and sixty-three.
+          </p>
+        </div>
+
+        <ol class="cadence">
+          <li class="cadence__item reveal" data-reveal>
+            <span class="cadence__num">01</span>
+            <div>
+              <h3>Strength, twice a week</h3>
+              <p>Two 30-minute coached sessions in the gym at Crunch, programmed for you, never improvised.</p>
+              <span class="cadence__meta">2 × 30 min · weekly</span>
+            </div>
+          </li>
+          <li class="cadence__item reveal" data-reveal data-delay="1">
+            <span class="cadence__num">02</span>
+            <div>
+              <h3>Yoga &amp; movement</h3>
+              <p>A guided practice to mobilize, lengthen, and undo what sitting all week does to a body.</p>
+              <span class="cadence__meta">30 min · weekly</span>
+            </div>
+          </li>
+          <li class="cadence__item reveal" data-reveal data-delay="2">
+            <span class="cadence__num">03</span>
+            <div>
+              <h3>Guided meditation</h3>
+              <p>Thirty minutes of trained stillness: breath, attention, and a nervous system that finally exhales.</p>
+              <span class="cadence__meta">30 min · weekly</span>
+            </div>
+          </li>
+          <li class="cadence__item reveal" data-reveal data-delay="3">
+            <span class="cadence__num">04</span>
+            <div>
+              <h3>One-on-one coaching</h3>
+              <p>A full hour with your coach to look at the whole picture and adjust the plan to your real life.</p>
+              <span class="cadence__meta">60 min · every other week</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  THE CARE TEAM (Pillars) ─────────────────────────── -->
+    <section class="care section" id="care">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label reveal" data-reveal>Your care team</p>
+          <h2 class="section-title reveal" data-reveal data-delay="1">
+            Four pillars, one set of people who talk to each other.
+          </h2>
+        </div>
+
+        <div class="pillars">
+          <article class="pillar reveal" data-reveal>
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 6v28M6 20h28"/></svg>
+            </div>
+            <h3>Movement</h3>
+            <p>A movement specialist and strength coaches who build the body you'll want in twenty years, not just this summer.</p>
+          </article>
+
+          <article class="pillar reveal" data-reveal data-delay="1">
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><path d="M8 24c4-2 6-2 12 0s8 2 12 0M8 16c4-2 6-2 12 0s8 2 12 0"/></svg>
+            </div>
+            <h3>Stillness</h3>
+            <p>Yoga and guided meditation that treat the nervous system as seriously as the muscles. Rest as a discipline.</p>
+          </article>
+
+          <article class="pillar reveal" data-reveal data-delay="2">
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><path d="M20 7c5 6 9 10 9 16a9 9 0 11-18 0c0-6 4-10 9-16z"/></svg>
+            </div>
+            <h3>Nourishment</h3>
+            <p>A registered dietitian and nutritionist to make eating feel obvious again. No fads, no guilt, just what works for you.</p>
+          </article>
+
+          <article class="pillar reveal" data-reveal data-delay="3">
+            <div class="pillar__icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><path d="M14 26c-4-2-6-6-6-10a12 12 0 0124 0c0 4-2 8-6 10v5H14z"/></svg>
+            </div>
+            <h3>Mind</h3>
+            <p>Trusted referrals to licensed therapists and psychologists, so the inner work has somewhere real to go.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  MEMBERSHIP  ─────────────────────────── -->
+    <section class="membership section" id="membership">
+      <div class="membership__art" aria-hidden="true"><div class="caustics caustics--soft"></div></div>
+      <div class="container membership__grid">
+        <div class="membership__copy">
+          <p class="section-label reveal" data-reveal>Founding membership</p>
+          <h2 class="section-title section-title--light reveal" data-reveal data-delay="1">
+            Everything, for the price of the three things you already pay for.
+          </h2>
+          <p class="membership__intro reveal" data-reveal data-delay="2">
+            This isn't a gym membership. It's a coaching experience. Add up a premium
+            gym, a coach, and the therapy app you forget to use, and INTL Wellness is
+            all of it: coordinated, in one place, by one team that knows your name.
+          </p>
+          <ul class="membership__list">
+            <li class="reveal" data-reveal>Two coached strength sessions weekly</li>
+            <li class="reveal" data-reveal data-delay="1">Weekly yoga &amp; guided meditation</li>
+            <li class="reveal" data-reveal data-delay="2">Biweekly one-on-one coaching hour</li>
+            <li class="reveal" data-reveal data-delay="3">Dietitian &amp; movement-specialist access</li>
+            <li class="reveal" data-reveal data-delay="4">Curated therapist &amp; psychologist referrals</li>
+            <li class="reveal" data-reveal data-delay="5">Members' community &amp; private chat <span class="soon">soon</span></li>
+          </ul>
+        </div>
+
+        <aside class="price-card reveal" data-reveal data-delay="2">
+          <p class="price-card__tag">Founding rate</p>
+          <p class="price-card__amount"><span>$</span>800<span class="price-card__per">/ month</span></p>
+          <p class="price-card__sub">≈ 4.5 guided hours each week · cancel anytime</p>
+          <a href="#waitlist" class="btn btn--solid btn--block">Request an invitation</a>
+          <p class="price-card__note">Founding members lock this rate for life. Limited first cohort.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  HOW IT WORKS  ─────────────────────────── -->
+    <section class="how section">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label reveal" data-reveal>How it begins</p>
+          <h2 class="section-title reveal" data-reveal data-delay="1">Three steps to your first session.</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal" data-reveal>
+            <span class="step__num">1</span>
+            <h3>Request an invitation</h3>
+            <p>Join the founding waitlist below. We open spots in small cohorts so the rooms never feel crowded.</p>
+          </div>
+          <div class="step reveal" data-reveal data-delay="1">
+            <span class="step__num">2</span>
+            <h3>Tell us about you</h3>
+            <p>A short intake on your goals, history, and what "well" means to you. Your care team reads it before you arrive.</p>
+          </div>
+          <div class="step reveal" data-reveal data-delay="2">
+            <span class="step__num">3</span>
+            <h3>Step into the water</h3>
+            <p>We map your first month together: sessions booked, team introduced, plan in hand. You just show up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  WAITLIST  ─────────────────────────── -->
+    <section class="waitlist section" id="waitlist">
+      <div class="container waitlist__grid">
+        <div class="waitlist__copy">
+          <p class="section-label reveal" data-reveal>Founding waitlist</p>
+          <h2 class="section-title reveal" data-reveal data-delay="1">Hold your place in the first cohort.</h2>
+          <p class="waitlist__intro reveal" data-reveal data-delay="2">
+            No payment today. Tell us where to reach you and a little about what brings
+            you here, and we'll be in touch as spots open.
+          </p>
+          <p class="waitlist__assurance reveal" data-reveal data-delay="3">
+            We read every note personally. Your details stay private.
+          </p>
+        </div>
+
+        <form class="form reveal" id="waitlistForm" data-reveal data-delay="1"
+              action="https://formspree.io/f/xwvdoljq" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New INTL Wellness founding-waitlist signup" />
+          <!-- Honeypot: bots fill this, humans don't. Formspree drops it. -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+          <div class="form__row">
+            <div class="field">
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" name="firstName" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label for="lastName">Last name</label>
+              <input type="text" id="lastName" name="lastName" autocomplete="family-name" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="optional">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="field">
+            <label for="goal">What brings you to INTL Wellness? <span class="optional">(optional)</span></label>
+            <textarea id="goal" name="goal" rows="3" placeholder="Stress, strength, sleep, starting over…"></textarea>
+          </div>
+          <button type="submit" class="btn btn--solid btn--block">Join the waitlist</button>
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────────────────────────  FOOTER  ─────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="wordmark wordmark--footer">
+          <span class="wordmark__text">INTL&nbsp;Wellness</span>
+        </span>
+        <p>A wellness membership for the whole self.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#ethos">Ethos</a>
+        <a href="#mirror">The Question</a>
+        <a href="#week">The Week</a>
+        <a href="#care">Care</a>
+        <a href="#membership">Membership</a>
+        <a href="#waitlist">Waitlist</a>
+      </nav>
+      <div class="footer__meta">
+        <p>© <span id="year"></span> INTL Wellness. All rights reserved.
+          <span class="footer__sep">·</span>
+          Website by <a href="https://mauops.com" class="footer__credit" target="_blank" rel="noopener">Mau Consulting</a></p>
+        <p class="footer__fineprint">Site copy &amp; details are for design preview only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
