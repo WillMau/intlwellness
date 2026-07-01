@@ -155,22 +155,6 @@
     }
   })();
 
-  /* ----- Mirror section: gently auto-alternate the rows neg ↔ pos ----- */
-  (function mirror() {
-    var rows = [].slice.call(document.querySelectorAll(".mirror__row"));
-    if (!rows.length) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    var on = false;
-    function sweep() {
-      on = !on;
-      rows.forEach(function (row, i) {
-        setTimeout(function () { row.classList.toggle("is-pos", on); }, i * 220);
-      });
-    }
-    setInterval(sweep, 5000);
-  })();
-
   /* ----- Nav: solid background after scroll ----- */
   var nav = document.getElementById("nav");
   function onScroll() {

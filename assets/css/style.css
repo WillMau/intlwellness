@@ -303,69 +303,6 @@ em { font-style: italic; }
 }
 
 /* ============================================================
-   MIRROR — "What do you see?"
-   ============================================================ */
-.mirror { position: relative; overflow: hidden; background: var(--sea-ink); color: var(--paper); }
-.mirror__art { position: absolute; inset: 0; z-index: 0; opacity: 0.4; }
-.mirror__inner { position: relative; z-index: 1; }
-.mirror .section-label { color: var(--sea); }
-.mirror .section-label::before { background: var(--sea); }
-.mirror__title { max-width: 18ch; }
-.mirror__intro {
-  margin-top: 1.75rem; max-width: 54ch;
-  color: color-mix(in srgb, var(--paper) 76%, transparent);
-  font-size: 1.1rem;
-}
-
-/* The flip list: initial + a word that turns from struggle → becoming */
-.mirror__list {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  border-top: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
-}
-.mirror__row {
-  display: flex; align-items: baseline; gap: 0.1em;
-  padding-block: clamp(0.6rem, 2vw, 1.1rem);
-  border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
-  font-family: var(--display); font-weight: 300;
-  font-size: clamp(2.2rem, 6.5vw, 4.2rem);
-  line-height: 1.05; letter-spacing: -0.02em;
-  cursor: default; outline: none;
-}
-.m-letter { color: var(--sea); }
-.m-stack { position: relative; display: inline-grid; }
-.m-neg, .m-pos {
-  grid-area: 1 / 1;                /* stack both words in the same cell */
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-}
-.m-neg { color: color-mix(in srgb, var(--paper) 55%, transparent); }
-.m-pos {
-  color: var(--paper);
-  opacity: 0; transform: translateY(0.32em);
-}
-/* On hover/focus OR when JS flags the row, reveal the "becoming" word */
-.mirror__row:hover .m-neg,
-.mirror__row:focus-visible .m-neg,
-.mirror__row.is-pos .m-neg { opacity: 0; transform: translateY(-0.32em); }
-.mirror__row:hover .m-pos,
-.mirror__row:focus-visible .m-pos,
-.mirror__row.is-pos .m-pos { opacity: 1; transform: none; }
-
-.mirror__close {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem;
-}
-.mirror__close p {
-  font-family: var(--display); font-weight: 300;
-  font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.01em;
-}
-.mirror__close strong { color: var(--sea); font-weight: 400; }
-.mirror__close .btn--solid { background: var(--paper); color: var(--sea-ink); }
-.mirror__close .btn--solid:hover { background: var(--sea); color: var(--paper); }
-@media (prefers-reduced-motion: reduce) {
-  .m-neg, .m-pos { transition: none; }
-}
-
-/* ============================================================
    THE WEEK — cadence
    ============================================================ */
 .week { background: var(--sand-deep); }
