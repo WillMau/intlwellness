@@ -449,6 +449,13 @@ em { font-style: italic; }
 .footer__nav a { font-size: 0.92rem; transition: color .3s var(--ease); }
 .footer__nav a:hover { color: var(--paper); }
 .footer__meta { font-size: 0.82rem; color: color-mix(in srgb, var(--paper) 55%, transparent); display: grid; gap: 0.4rem; }
+.inline-link {
+  color: var(--sea-deep);
+  border-bottom: 1px solid color-mix(in srgb, var(--sea) 55%, transparent);
+  transition: border-color .3s var(--ease), color .3s var(--ease);
+}
+.inline-link:hover { color: var(--ink); border-color: var(--sea-deep); }
+
 .footer__fineprint { font-style: italic; }
 .footer__sep { margin-inline: 0.5rem; color: color-mix(in srgb, var(--paper) 35%, transparent); }
 .footer__credit {

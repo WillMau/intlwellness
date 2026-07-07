@@ -1,0 +1,176 @@
+/* ============================================================
+   INTL WELLNESS — Coaching Assessment (intake wizard)
+   Builds on style.css tokens.
+   ============================================================ */
+
+.intake-page { background: var(--sand); }
+
+.intake { padding-top: 96px; padding-bottom: clamp(4rem, 8vw, 7rem); }
+.intake__wrap { max-width: 760px; }
+
+.intake__head { margin-bottom: 2.5rem; }
+.intake__title {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08;
+  letter-spacing: -0.02em; margin: 1rem 0 1.25rem;
+}
+.intake__welcome { color: var(--ink-soft); font-size: 1.08rem; max-width: 60ch; }
+
+/* ----------  Progress  ---------- */
+.progress {
+  position: sticky; top: 76px; z-index: 20;
+  background: color-mix(in srgb, var(--sand) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding: 1rem 0 1.1rem; margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.progress__meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; gap: 1rem; }
+.progress__step { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sea-deep); font-weight: 500; }
+.progress__title { font-family: var(--display); font-size: 1.05rem; color: var(--ink); }
+.progress__track { height: 4px; border-radius: 100px; background: var(--line); overflow: hidden; }
+.progress__bar {
+  height: 100%; width: 8%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--sea), var(--sea-deep));
+  transition: width 0.5s var(--ease);
+}
+
+/* ----------  Steps  ---------- */
+.iform { position: relative; }
+.step { border: none; padding: 0; margin: 0; min-inline-size: 0; }
+.step:not(.is-active) { display: none; }
+.step.is-active { animation: stepIn 0.5s var(--ease); }
+@keyframes stepIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .step.is-active { animation: none; } }
+
+.step__title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em;
+  margin-bottom: 0.5rem; padding: 0;
+}
+.step__lede { color: var(--ink-soft); margin-bottom: 1.75rem; }
+.sub {
+  font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sea-deep); font-weight: 600;
+  margin: 1.75rem 0 0.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+}
+
+/* ----------  Fields  ---------- */
+.field { margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.field label { font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+.optional { color: var(--ink-soft); font-weight: 400; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.field input[type="text"], .field input[type="email"], .field input[type="tel"],
+.field input[type="number"], .field textarea {
+  font: inherit; color: var(--ink); width: 100%;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+  padding: 0.8rem 1rem; resize: vertical;
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--sea);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--sea) 16%, transparent);
+}
+
+/* ----------  Chips (single-select radios)  ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.chip { position: relative; cursor: pointer; }
+.chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.chip span {
+  display: inline-block; padding: 0.55rem 1.1rem; border-radius: 100px;
+  border: 1px solid var(--line); background: var(--paper);
+  font-size: 0.92rem; color: var(--ink-soft);
+  transition: all .25s var(--ease);
+}
+.chip:hover span { border-color: var(--sea); }
+.chip input:checked + span {
+  background: var(--sea-deep); color: var(--paper); border-color: var(--sea-deep);
+}
+.chip input:focus-visible + span { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sea) 20%, transparent); }
+
+/* ----------  Checkboxes (multi-select)  ---------- */
+.checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem; margin-bottom: 0.5rem; }
+.check { position: relative; cursor: pointer; }
+.check input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.check span {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1rem; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--paper);
+  font-size: 0.95rem; color: var(--ink); transition: all .25s var(--ease);
+}
+.check span::before {
+  content: ""; width: 18px; height: 18px; border-radius: 5px; flex: none;
+  border: 1.5px solid var(--line); transition: all .2s var(--ease);
+}
+.check:hover span { border-color: var(--sea); }
+.check input:checked + span { border-color: var(--sea); background: color-mix(in srgb, var(--sea) 10%, var(--paper)); }
+.check input:checked + span::before {
+  background: var(--sea-deep); border-color: var(--sea-deep);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+  background-size: 12px; background-repeat: no-repeat; background-position: center;
+}
+.check input:focus-visible + span { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sea) 18%, transparent); }
+
+/* ----------  Range sliders  ---------- */
+.range-field { gap: 0.75rem; }
+.range-field label { display: flex; justify-content: space-between; align-items: center; }
+.range-field output, .wheel__row output {
+  font-family: var(--display); font-size: 1.4rem; color: var(--sea-deep);
+  min-width: 1.6em; text-align: center;
+}
+.range-scale { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--ink-soft); }
+
+input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+  border-radius: 100px; background: var(--line); cursor: pointer; margin: 0.2rem 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--sea-deep); border: 3px solid var(--paper);
+  box-shadow: 0 2px 8px rgba(21,40,44,.35); transition: transform .15s var(--ease);
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.12); }
+input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--sea-deep);
+  border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(21,40,44,.35);
+}
+input[type="range"]:focus-visible { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--sea) 20%, transparent); }
+
+/* ----------  Wellness wheel  ---------- */
+.wheel { display: grid; gap: 0.9rem; margin-bottom: 1.75rem; }
+.wheel__row {
+  display: grid; grid-template-columns: minmax(9rem, 12rem) 1fr 2rem;
+  align-items: center; gap: 1rem;
+}
+.wheel__label { font-size: 0.95rem; }
+@media (max-width: 560px) {
+  .wheel__row { grid-template-columns: 1fr auto; grid-template-areas: "label val" "slider slider"; row-gap: 0.4rem; }
+  .wheel__label { grid-area: label; }
+  .wheel__row output { grid-area: val; }
+  .wheel__slider { grid-area: slider; }
+}
+
+/* ----------  Consent  ---------- */
+.consent { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.consent .check span { align-items: flex-start; line-height: 1.5; font-size: 0.9rem; color: var(--ink-soft); }
+.consent .check span::before { margin-top: 0.15rem; }
+
+/* ----------  Step controls  ---------- */
+.step-nav {
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin-top: 2.5rem; padding-top: 1.75rem; border-top: 1px solid var(--line);
+}
+.step-nav .btn--ghost { color: var(--ink-soft); }
+#btnNext, #btnSubmit { margin-left: auto; }
+
+.form__status { margin-top: 1.25rem; font-size: 0.95rem; min-height: 1.2em; text-align: right; }
+.form__status.is-success { color: var(--sea-deep); }
+.form__status.is-error { color: #b4543f; }
+
+/* ----------  Success state  ---------- */
+.intake-done {
+  text-align: center; padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+}
+.intake-done h2 { font-family: var(--display); font-weight: 300; font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom: 1rem; }
+.intake-done p { color: var(--ink-soft); max-width: 46ch; margin: 0 auto 2rem; }

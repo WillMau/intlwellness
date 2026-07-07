@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTL Wellness · Privacy Notice</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .legal { padding-top: 110px; padding-bottom: clamp(4rem,8vw,7rem); }
+    .legal__wrap { max-width: 720px; }
+    .legal h1 { font-family: var(--display); font-weight: 300; font-size: clamp(2rem,5vw,3rem); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .legal .updated { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 2.5rem; }
+    .legal h2 { font-family: var(--display); font-weight: 400; font-size: 1.4rem; margin: 2.25rem 0 0.75rem; }
+    .legal p, .legal li { color: var(--ink-soft); line-height: 1.7; }
+    .legal ul { padding-left: 1.2rem; margin: 0.5rem 0; list-style: disc; }
+    .legal li { margin-bottom: 0.4rem; }
+    .legal .todo { background: color-mix(in srgb, var(--sea) 12%, var(--paper)); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--sea-deep); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="nav is-scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="wordmark" aria-label="INTL Wellness home">
+        <span class="wordmark__text">INTL&nbsp;Wellness</span>
+      </a>
+      <a href="index.html" class="btn btn--pill">← Back to home</a>
+    </div>
+  </header>
+
+  <main class="legal">
+    <div class="container legal__wrap">
+      <h1>Privacy Notice</h1>
+      <p class="updated">Last updated: <!-- TODO --> ______, 2026</p>
+
+      <p class="todo">Christian — this is a plain-language starting template, not legal advice.
+        Fill the blanks and have it reviewed before relying on it. If you ever bill insurance or
+        take on clinical/medical records, you'll need a HIPAA-compliant process instead.</p>
+
+      <h2>What we collect</h2>
+      <p>When you complete our coaching assessment, you may share your name and contact details,
+        along with information about your health, lifestyle, goals, and wellbeing. We only ask for
+        what helps us coach you well.</p>
+
+      <h2>How we use it</h2>
+      <p>Your information is used solely by the INTL Wellness coaching team to understand your
+        needs, prepare for your sessions, and support your care. We do not sell your information
+        or share it for advertising.</p>
+
+      <h2>How it's stored &amp; protected</h2>
+      <ul>
+        <li>Your submission is transmitted over an encrypted (HTTPS) connection.</li>
+        <li>Assessment responses are delivered and stored through our form provider (Formspree)
+          and our secured email, accessible only to authorized coaching staff.</li>
+        <li>Access is protected with strong passwords and two-factor authentication.</li>
+      </ul>
+
+      <h2>Sharing</h2>
+      <p>We only share your information with your consent — for example, a referral to a therapist,
+        dietitian, or physician you've agreed to. We may use trusted service providers (such as our
+        form and email tools) who process data on our behalf.</p>
+
+      <h2>Your choices</h2>
+      <p>You can ask us to access, correct, or delete the information you've shared at any time.
+        Contact us at <!-- TODO -->
+        <a href="mailto:______@intlwellness.com" class="inline-link">______@intlwellness.com</a>.</p>
+
+      <h2>A note on scope</h2>
+      <p>INTL Wellness provides health and wellness coaching. Our coaching is not medical care, and
+        this assessment is not a medical record. For diagnosis or treatment, please consult a
+        licensed healthcare provider.</p>
+
+      <h2>Contact</h2>
+      <p><!-- TODO --> INTL Wellness · ______ · <a href="mailto:______@intlwellness.com" class="inline-link">______@intlwellness.com</a></p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="wordmark wordmark--footer"><span class="wordmark__text">INTL Wellness</span></span>
+        <p>A coaching experience for the whole self.</p>
+      </div>
+      <div class="footer__meta">
+        <p>© <span id="year"></span> INTL Wellness. All rights reserved.
+          <span class="footer__sep">·</span>
+          Website by <a href="https://mauops.com" class="footer__credit" target="_blank" rel="noopener">Mau Consulting</a></p>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

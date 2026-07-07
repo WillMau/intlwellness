@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTL Wellness · Coaching Assessment</title>
+  <meta name="description" content="A guided coaching assessment to understand where you are today and build a realistic, sustainable path toward your health and wellness goals." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/intake.css" />
+</head>
+<body class="intake-page">
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="nav is-scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="wordmark" aria-label="INTL Wellness home">
+        <span class="wordmark__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+            <path d="M2 12c3.5 0 3.5 3 7 3s3.5-3 7-3 3.5 3 7 3 3.5-3 7-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M2 19c3.5 0 3.5 3 7 3s3.5-3 7-3 3.5 3 7 3 3.5-3 7-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </span>
+        <span class="wordmark__text">INTL&nbsp;Wellness</span>
+      </a>
+      <a href="index.html" class="btn btn--pill">← Back to home</a>
+    </div>
+  </header>
+
+  <main class="intake">
+    <div class="container intake__wrap">
+
+      <!-- Intro -->
+      <header class="intake__head">
+        <p class="section-label">Coaching Assessment</p>
+        <h1 class="intake__title">Building a foundation for sustainable change.</h1>
+        <p class="intake__welcome">
+          Thank you for taking the time to complete this assessment. There are no right or
+          wrong answers. This is designed to help us understand where you are today, what
+          matters most to you, and how we can work together toward your goals. It takes about
+          ten minutes, and everything you share stays private.
+        </p>
+      </header>
+
+      <!-- Progress -->
+      <div class="progress" id="progress">
+        <div class="progress__meta">
+          <span class="progress__step" id="progressStep">Step 1 of 13</span>
+          <span class="progress__title" id="progressTitle">Welcome</span>
+        </div>
+        <div class="progress__track"><div class="progress__bar" id="progressBar"></div></div>
+      </div>
+
+      <!-- ===============  FORM  =============== -->
+      <form id="intakeForm" class="iform"
+            action="https://formspree.io/f/xnjkyajn" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New INTL Wellness coaching assessment" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+               style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+
+        <!-- STEP 1 · Welcome / contact -->
+        <fieldset class="step is-active" data-step="Welcome">
+          <legend class="step__title">First, how do we reach you?</legend>
+          <div class="grid-2">
+            <div class="field"><label for="firstName">First name</label>
+              <input id="firstName" name="First name" type="text" autocomplete="given-name" required /></div>
+            <div class="field"><label for="lastName">Last name</label>
+              <input id="lastName" name="Last name" type="text" autocomplete="family-name" required /></div>
+          </div>
+          <div class="field"><label for="email">Email</label>
+            <input id="email" name="Email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="phone">Phone <span class="optional">(optional)</span></label>
+            <input id="phone" name="Phone" type="tel" autocomplete="tel" /></div>
+        </fieldset>
+
+        <!-- STEP 2 · Your Story -->
+        <fieldset class="step" data-step="Your Story">
+          <legend class="step__title">Your story</legend>
+          <p class="step__lede">Tell me a little about yourself.</p>
+          <div class="field"><label for="q_bring">What brings you to health coaching now?</label>
+            <textarea id="q_bring" name="What brings you now" rows="3"></textarea></div>
+          <div class="field"><label for="q_inspire">What inspired you to make this appointment?</label>
+            <textarea id="q_inspire" name="What inspired this" rows="3"></textarea></div>
+          <div class="field"><label for="q_year">If we met one year from today and things had gone really well, what would be different?</label>
+            <textarea id="q_year" name="One year from now" rows="3"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 3 · Overall Health -->
+        <fieldset class="step" data-step="Overall Health">
+          <legend class="step__title">Overall health</legend>
+          <div class="field">
+            <label>How would you rate your current health?</label>
+            <div class="chips" role="radiogroup" aria-label="Current health rating">
+              <label class="chip"><input type="radio" name="Health rating" value="Excellent" /><span>Excellent</span></label>
+              <label class="chip"><input type="radio" name="Health rating" value="Very good" /><span>Very good</span></label>
+              <label class="chip"><input type="radio" name="Health rating" value="Good" /><span>Good</span></label>
+              <label class="chip"><input type="radio" name="Health rating" value="Fair" /><span>Fair</span></label>
+              <label class="chip"><input type="radio" name="Health rating" value="Poor" /><span>Poor</span></label>
+            </div>
+          </div>
+          <div class="field"><label for="q_cond">Current medical conditions</label>
+            <textarea id="q_cond" name="Medical conditions" rows="2"></textarea></div>
+          <div class="field"><label for="q_meds">Current medications</label>
+            <textarea id="q_meds" name="Medications" rows="2"></textarea></div>
+          <div class="field"><label for="q_injury">Any injuries, physical limitations, or chronic pain?</label>
+            <textarea id="q_injury" name="Injuries or limitations" rows="2"></textarea></div>
+          <div class="field">
+            <label>Have you been cleared by your healthcare provider to participate in exercise?</label>
+            <div class="chips" role="radiogroup" aria-label="Exercise clearance">
+              <label class="chip"><input type="radio" name="Cleared to exercise" value="Yes" /><span>Yes</span></label>
+              <label class="chip"><input type="radio" name="Cleared to exercise" value="No" /><span>No</span></label>
+              <label class="chip"><input type="radio" name="Cleared to exercise" value="Not sure" /><span>Not sure</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4 · Lifestyle Snapshot -->
+        <fieldset class="step" data-step="Lifestyle Snapshot">
+          <legend class="step__title">Lifestyle snapshot</legend>
+          <p class="step__lede">Tell me about a typical day.</p>
+          <div class="field"><label for="q_day">A typical day, start to finish</label>
+            <textarea id="q_day" name="Typical day" rows="3"></textarea></div>
+
+          <h4 class="sub">Sleep</h4>
+          <div class="grid-2">
+            <div class="field"><label for="q_sleephrs">Hours per night</label>
+              <input id="q_sleephrs" name="Sleep hours" type="number" min="0" max="24" step="0.5" /></div>
+            <div class="field"><label>Restful?</label>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="Sleep restful" value="Yes" /><span>Yes</span></label>
+                <label class="chip"><input type="radio" name="Sleep restful" value="No" /><span>No</span></label>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="sub">Nutrition</h4>
+          <div class="field"><label for="q_eat">How would you describe your eating habits?</label>
+            <textarea id="q_eat" name="Eating habits" rows="2"></textarea></div>
+          <div class="grid-2">
+            <div class="field"><label for="q_meals">Meals per day</label>
+              <input id="q_meals" name="Meals per day" type="text" /></div>
+            <div class="field"><label for="q_water">Water intake</label>
+              <input id="q_water" name="Water intake" type="text" placeholder="e.g. 4 glasses" /></div>
+          </div>
+
+          <h4 class="sub">Movement</h4>
+          <div class="grid-2">
+            <div class="field"><label for="q_ex">Current exercise</label>
+              <input id="q_ex" name="Current exercise" type="text" /></div>
+            <div class="field"><label for="q_days">Days per week</label>
+              <input id="q_days" name="Exercise days per week" type="number" min="0" max="7" /></div>
+            <div class="field"><label for="q_type">Type</label>
+              <input id="q_type" name="Exercise type" type="text" /></div>
+            <div class="field"><label for="q_dur">Duration</label>
+              <input id="q_dur" name="Exercise duration" type="text" placeholder="e.g. 45 min" /></div>
+          </div>
+
+          <div class="field range-field">
+            <label for="q_stress">Rate your stress <output for="q_stress" id="out_stress">5</output></label>
+            <input id="q_stress" name="Stress (0-10)" type="range" min="0" max="10" value="5" />
+            <div class="range-scale"><span>0 · calm</span><span>10 · overwhelmed</span></div>
+          </div>
+          <div class="field range-field">
+            <label for="q_energy">Rate your energy <output for="q_energy" id="out_energy">5</output></label>
+            <input id="q_energy" name="Energy (0-10)" type="range" min="0" max="10" value="5" />
+            <div class="range-scale"><span>0 · depleted</span><span>10 · energized</span></div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 5 · Exercise History -->
+        <fieldset class="step" data-step="Exercise History">
+          <legend class="step__title">Exercise history</legend>
+          <div class="field"><label for="q_enjoy">What types of movement have you enjoyed in the past?</label>
+            <textarea id="q_enjoy" name="Movement enjoyed" rows="2"></textarea></div>
+          <div class="field"><label for="q_dislike">What forms of exercise do you dislike?</label>
+            <textarea id="q_dislike" name="Exercise disliked" rows="2"></textarea></div>
+          <div class="field"><label>Have you ever worked with a personal trainer or coach?</label>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="Worked with trainer" value="Yes" /><span>Yes</span></label>
+              <label class="chip"><input type="radio" name="Worked with trainer" value="No" /><span>No</span></label>
+            </div>
+          </div>
+          <div class="field"><label for="q_helped">What has helped you stay active?</label>
+            <textarea id="q_helped" name="What helped stay active" rows="2"></textarea></div>
+          <div class="field"><label for="q_hard">What has made it difficult?</label>
+            <textarea id="q_hard" name="What made it difficult" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 6 · Readiness for Change -->
+        <fieldset class="step" data-step="Readiness for Change">
+          <legend class="step__title">Readiness for change</legend>
+          <div class="field range-field">
+            <label for="q_import">How important is improving your health? <output for="q_import" id="out_import">5</output></label>
+            <input id="q_import" name="Importance (0-10)" type="range" min="0" max="10" value="5" />
+            <div class="range-scale"><span>0</span><span>10</span></div>
+          </div>
+          <div class="field range-field">
+            <label for="q_conf">How confident are you that you can make changes? <output for="q_conf" id="out_conf">5</output></label>
+            <input id="q_conf" name="Confidence (0-10)" type="range" min="0" max="10" value="5" />
+            <div class="range-scale"><span>0</span><span>10</span></div>
+          </div>
+          <div class="field"><label for="q_why">Why did you choose that number instead of a lower one?</label>
+            <textarea id="q_why" name="Why not lower" rows="2"></textarea></div>
+          <div class="field"><label for="q_higher">What would move you one point higher?</label>
+            <textarea id="q_higher" name="What moves you higher" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 7 · Wellness Wheel -->
+        <fieldset class="step" data-step="Wellness Wheel">
+          <legend class="step__title">Wellness wheel</legend>
+          <p class="step__lede">Rate each area from 1 to 10.</p>
+          <div class="wheel">
+            <!-- populated: label + slider each -->
+            <div class="wheel__row"><span class="wheel__label">❤️ Physical health</span>
+              <input name="Wheel: Physical health" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">😴 Sleep</span>
+              <input name="Wheel: Sleep" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">🥗 Nutrition</span>
+              <input name="Wheel: Nutrition" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">🏃 Movement</span>
+              <input name="Wheel: Movement" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">😌 Stress</span>
+              <input name="Wheel: Stress" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">😊 Emotional well-being</span>
+              <input name="Wheel: Emotional well-being" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">👥 Relationships</span>
+              <input name="Wheel: Relationships" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">🎯 Purpose</span>
+              <input name="Wheel: Purpose" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">⚖️ Work-life balance</span>
+              <input name="Wheel: Work-life balance" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+            <div class="wheel__row"><span class="wheel__label">🎉 Fun &amp; joy</span>
+              <input name="Wheel: Fun and joy" type="range" min="1" max="10" value="5" class="wheel__slider" /><output>5</output></div>
+          </div>
+          <div class="field"><label for="q_first">Which area would you most like to improve first?</label>
+            <input id="q_first" name="Improve first" type="text" /></div>
+        </fieldset>
+
+        <!-- STEP 8 · Strengths -->
+        <fieldset class="step" data-step="Strengths">
+          <legend class="step__title">Strengths</legend>
+          <div class="field"><label for="q_doing">What are you already doing well?</label>
+            <textarea id="q_doing" name="Doing well" rows="2"></textarea></div>
+          <div class="field"><label for="q_str">What strengths have helped you make positive changes in the past?</label>
+            <textarea id="q_str" name="Strengths" rows="2"></textarea></div>
+          <div class="field"><label for="q_support">Who supports you?</label>
+            <textarea id="q_support" name="Support system" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 9 · Barriers -->
+        <fieldset class="step" data-step="Barriers">
+          <legend class="step__title">Barriers</legend>
+          <p class="step__lede">What tends to get in your way? Choose any that apply.</p>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="Barriers" value="Time" /><span>Time</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Motivation" /><span>Motivation</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Energy" /><span>Energy</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Confidence" /><span>Confidence</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Pain" /><span>Pain</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Knowledge" /><span>Knowledge</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Family responsibilities" /><span>Family responsibilities</span></label>
+            <label class="check"><input type="checkbox" name="Barriers" value="Work" /><span>Work</span></label>
+          </div>
+          <div class="field"><label for="q_bar_other">Anything else in the way?</label>
+            <input id="q_bar_other" name="Barriers other" type="text" /></div>
+        </fieldset>
+
+        <!-- STEP 10 · Values -->
+        <fieldset class="step" data-step="Values">
+          <legend class="step__title">Values</legend>
+          <p class="step__lede">What matters most to you? Choose any that apply.</p>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="Values" value="Health" /><span>Health</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Family" /><span>Family</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Longevity" /><span>Longevity</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Strength" /><span>Strength</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Confidence" /><span>Confidence</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Energy" /><span>Energy</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Mental health" /><span>Mental health</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Independence" /><span>Independence</span></label>
+            <label class="check"><input type="checkbox" name="Values" value="Adventure" /><span>Adventure</span></label>
+          </div>
+          <div class="field"><label for="q_val_other">Anything else you value deeply?</label>
+            <input id="q_val_other" name="Values other" type="text" /></div>
+          <div class="field"><label for="q_val_support">How would improving your health support those values?</label>
+            <textarea id="q_val_support" name="Health supports values" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 11 · Coaching Goals -->
+        <fieldset class="step" data-step="Coaching Goals">
+          <legend class="step__title">Coaching goals</legend>
+          <p class="step__lede">What are your top three goals?</p>
+          <div class="field"><label for="q_goal1">Goal 1</label><input id="q_goal1" name="Goal 1" type="text" /></div>
+          <div class="field"><label for="q_goal2">Goal 2</label><input id="q_goal2" name="Goal 2" type="text" /></div>
+          <div class="field"><label for="q_goal3">Goal 3</label><input id="q_goal3" name="Goal 3" type="text" /></div>
+          <div class="field"><label for="q_progress">How will you know you're making progress?</label>
+            <textarea id="q_progress" name="Progress markers" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 12 · Looking Ahead -->
+        <fieldset class="step" data-step="Looking Ahead">
+          <legend class="step__title">Looking ahead</legend>
+          <div class="field"><label for="q_excited">What are you most excited about?</label>
+            <textarea id="q_excited" name="Most excited about" rows="2"></textarea></div>
+          <div class="field"><label for="q_concern">What concerns you most?</label>
+            <textarea id="q_concern" name="Biggest concern" rows="2"></textarea></div>
+          <div class="field"><label for="q_success">What does success look like for you?</label>
+            <textarea id="q_success" name="Success looks like" rows="2"></textarea></div>
+        </fieldset>
+
+        <!-- STEP 13 · The Coaching Compass -->
+        <fieldset class="step" data-step="The Coaching Compass">
+          <legend class="step__title">The Coaching Compass</legend>
+          <p class="step__lede">Four questions to guide every session that follows.</p>
+          <div class="field"><label for="c1">What matters most to you?</label>
+            <textarea id="c1" name="Compass: What matters most" rows="2"></textarea></div>
+          <div class="field"><label for="c2">What's working already?</label>
+            <textarea id="c2" name="Compass: What is working" rows="2"></textarea></div>
+          <div class="field"><label for="c3">What's getting in the way?</label>
+            <textarea id="c3" name="Compass: What is in the way" rows="2"></textarea></div>
+          <div class="field"><label for="c4">What's one small step you're ready to take?</label>
+            <textarea id="c4" name="Compass: One small step" rows="2"></textarea></div>
+
+          <div class="consent">
+            <label class="check">
+              <input type="checkbox" name="Consent given" value="Yes" required />
+              <span>I understand the information I've shared is transmitted securely and used
+                only by the INTL Wellness coaching team to support my care. See the
+                <a href="privacy.html" target="_blank" rel="noopener" class="inline-link">privacy notice</a>.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Controls -->
+        <div class="step-nav">
+          <button type="button" class="btn btn--ghost" id="btnBack" hidden>← Back</button>
+          <button type="button" class="btn btn--solid" id="btnNext">Continue →</button>
+          <button type="submit" class="btn btn--solid" id="btnSubmit" hidden>Submit assessment</button>
+        </div>
+        <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="wordmark wordmark--footer"><span class="wordmark__text">INTL Wellness</span></span>
+        <p>A coaching experience for the whole self.</p>
+      </div>
+      <div class="footer__meta">
+        <p>© <span id="year"></span> INTL Wellness. All rights reserved.
+          <span class="footer__sep">·</span>
+          Website by <a href="https://mauops.com" class="footer__credit" target="_blank" rel="noopener">Mau Consulting</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/intake.js"></script>
+</body>
+</html>
