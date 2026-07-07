@@ -52,18 +52,27 @@ drifting from the struggle to who you become, then resting on the final set.
 All design tokens live at the top of `style.css` under `:root`. Swap the palette
 or fonts there once and the whole site follows.
 
-### 3. Waitlist form — ✅ wired to Formspree
-The form posts to Formspree endpoint `https://formspree.io/f/xwvdoljq`. It's set
-in two places (kept in sync): the `<form action="…">` in `index.html` (no-JS
-fallback) and the `fetch(…)` call in `main.js` (handles the inline success/error
-message without a page reload). To change the destination, update **both**.
+### 3. Forms — wired to FormSubmit (free, multi-recipient)
+Both forms post to **FormSubmit** so submissions reach two inboxes with no paid
+plan and no shared account:
+- Waitlist → `index.html` `<form action="https://formsubmit.co/ajax/william.mau@gmail.com">`
+- Assessment → `intake.html`, same primary address
+
+Recipients are set in the markup:
+- **Primary:** `william.mau@gmail.com` (in the form `action`)
+- **CC:** `cmbnyc@hotmail.com` (hidden `_cc` field)
+- `_subject` sets the email subject; `_template=table` formats it; `_captcha=false`
+  skips the captcha; `_honey` is the spam honeypot.
 
 Notes:
-- Submissions land in the Formspree dashboard for that endpoint; set up email
-  notifications there.
-- A hidden `_gotcha` honeypot field filters basic spam bots.
-- **First submission:** Formspree usually emails you once to confirm/activate a
-  new form before it starts delivering — send one test signup to trigger that.
+- **Activation required once:** FormSubmit emails the primary address a one-time
+  confirmation link on the first submission. Until it's clicked, nothing is
+  delivered. Send one test through each form and click the link.
+- **Email exposure:** the two addresses are visible in page source (FormSubmit
+  requires the real address for `_cc`). Acceptable for now; to hide the primary,
+  activate then swap the `action` for FormSubmit's alias URL (`/el/<hash>`).
+- **Better privacy option:** Web3Forms hides recipient emails server-side (they're
+  tied to an access key, not in the HTML). Requires a free signup for the key.
 
 ### 4. Real photography (optional)
 The watery gradient/SVG art is intentional and self-contained — no stock photos,
