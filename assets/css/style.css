@@ -435,6 +435,10 @@ em { font-style: italic; }
 }
 .field input:user-invalid { border-color: #b4543f; }
 .form__status { margin-top: 1rem; font-size: 0.92rem; min-height: 1.2em; }
+.waitlist__next {
+  margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
+  text-align: center; font-size: 0.9rem; color: var(--ink-soft);
+}
 .form__status.is-success { color: var(--sea-deep); }
 .form__status.is-error { color: #b4543f; }
 
