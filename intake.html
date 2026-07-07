@@ -43,8 +43,9 @@
         <p class="intake__welcome">
           Thank you for taking the time to complete this assessment. There are no right or
           wrong answers. This is designed to help us understand where you are today, what
-          matters most to you, and how we can work together toward your goals. It takes about
-          ten minutes, and everything you share stays private.
+          matters most to you, and how we can work together toward your goals. Only your name
+          and email are needed. Everything else is optional, so answer what feels relevant,
+          skip the rest, and we'll go deeper together. Everything you share stays private.
         </p>
         <p class="intake__note">
           Just exploring? Most people start by <a href="index.html#waitlist" class="inline-link">joining the
@@ -77,8 +78,8 @@
           <div class="grid-2">
             <div class="field"><label for="firstName">First name</label>
               <input id="firstName" name="First name" type="text" autocomplete="given-name" required /></div>
-            <div class="field"><label for="lastName">Last name</label>
-              <input id="lastName" name="Last name" type="text" autocomplete="family-name" required /></div>
+            <div class="field"><label for="lastName">Last name <span class="optional">(optional)</span></label>
+              <input id="lastName" name="Last name" type="text" autocomplete="family-name" /></div>
           </div>
           <div class="field"><label for="email">Email</label>
             <input id="email" name="Email" type="email" autocomplete="email" required /></div>
@@ -90,10 +91,8 @@
         <fieldset class="step" data-step="Your Story">
           <legend class="step__title">Your story</legend>
           <p class="step__lede">Tell me a little about yourself.</p>
-          <div class="field"><label for="q_bring">What brings you to health coaching now?</label>
+          <div class="field"><label for="q_bring">What brings you to coaching now?</label>
             <textarea id="q_bring" name="What brings you now" rows="3"></textarea></div>
-          <div class="field"><label for="q_inspire">What inspired you to make this appointment?</label>
-            <textarea id="q_inspire" name="What inspired this" rows="3"></textarea></div>
           <div class="field"><label for="q_year">If we met one year from today and things had gone really well, what would be different?</label>
             <textarea id="q_year" name="One year from now" rows="3"></textarea></div>
         </fieldset>
@@ -157,15 +156,12 @@
           </div>
 
           <h4 class="sub">Movement</h4>
-          <div class="grid-2">
-            <div class="field"><label for="q_ex">Current exercise</label>
-              <input id="q_ex" name="Current exercise" type="text" /></div>
-            <div class="field"><label for="q_days">Days per week</label>
-              <input id="q_days" name="Exercise days per week" type="number" min="0" max="7" /></div>
-            <div class="field"><label for="q_type">Type</label>
-              <input id="q_type" name="Exercise type" type="text" /></div>
-            <div class="field"><label for="q_dur">Duration</label>
-              <input id="q_dur" name="Exercise duration" type="text" placeholder="e.g. 45 min" /></div>
+          <div class="field">
+            <label>Do you exercise regularly?</label>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="Exercises regularly" value="Yes" /><span>Yes</span></label>
+              <label class="chip"><input type="radio" name="Exercises regularly" value="No" /><span>No</span></label>
+            </div>
           </div>
 
           <div class="field range-field">
