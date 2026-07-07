@@ -227,8 +227,8 @@
       btn.disabled = true;
       btn.textContent = "Sending…";
 
-      // ── Submit to Formspree ─────────────────────────────────
-      fetch("https://formspree.io/f/xwvdoljq", {
+      // ── Submit to the form endpoint (FormSubmit, set in the HTML action) ──
+      fetch(form.action, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: new FormData(form)

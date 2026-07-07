@@ -1,6 +1,6 @@
 /* ============================================================
    INTL WELLNESS — Coaching Assessment wizard
-   Vanilla JS. Multi-step navigation + Formspree submit.
+   Vanilla JS. Multi-step navigation + FormSubmit submit.
    ============================================================ */
 (function () {
   "use strict";
