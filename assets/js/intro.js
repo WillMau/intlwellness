@@ -129,15 +129,23 @@
       }
     }
 
+    var musicFade = null;
+    function stopMusic() {
+      if (musicFade) { clearInterval(musicFade); musicFade = null; }
+      if (music) { try { music.pause(); music.currentTime = 0; } catch (e) {} }
+    }
     function fadeOut() {
       clearTimers();
       if (audio) { try { audio.pause(); } catch (e) {} }
-      // gently fade the ambient music out over ~2s
+      // Try to fade the music, but ALWAYS hard-stop it — iOS ignores volume
+      // changes, so we can't rely on the volume reaching zero to pause it.
       if (music) {
-        var fade = setInterval(function () {
-          if (music.volume > 0.006) { music.volume = Math.max(0, music.volume - 0.006); }
-          else { clearInterval(fade); try { music.pause(); } catch (e) {} }
-        }, 40);
+        var steps = 0;
+        musicFade = setInterval(function () {
+          steps++;
+          try { if (music.volume > 0.05) music.volume = Math.max(0, music.volume - 0.05); } catch (e) {}
+          if (steps >= 40 || music.volume <= 0.05) { stopMusic(); }   // ~2s cap, then stop no matter what
+        }, 50);
       }
       intro.style.transition = "opacity 2s ease";
       intro.style.opacity = "0";
@@ -148,6 +156,8 @@
 
     function teardown(immediate) {
       if (done) return; done = true;
+      if (audio) { try { audio.pause(); } catch (e) {} }
+      stopMusic();                       // guarantee audio + music are stopped
       document.documentElement.classList.remove("will-intro");
       if (intro) intro.style.display = "none";
       document.body.style.overflow = "";
