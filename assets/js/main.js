@@ -175,6 +175,18 @@
     }
   })();
 
+  /* ----- Replay intro (footer link) ----- */
+  var replay = document.getElementById("replayIntro");
+  if (replay) {
+    replay.addEventListener("click", function (e) {
+      e.preventDefault();
+      try { localStorage.removeItem("intl_intro_seen"); } catch (_) {}
+      // Re-enter the intro cleanly: reload if already forced, else go home forced.
+      if (/[?&]intro\b/.test(location.search)) location.reload();
+      else location.href = "/?intro";
+    });
+  }
+
   /* ----- Nav: solid background after scroll ----- */
   var nav = document.getElementById("nav");
   function onScroll() {

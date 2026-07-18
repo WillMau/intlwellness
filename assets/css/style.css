@@ -463,6 +463,8 @@ em { font-style: italic; }
 .inline-link:hover { color: var(--ink); border-color: var(--sea-deep); }
 
 .footer__fineprint { font-style: italic; }
+.footer__replay { opacity: 0.62; }
+.footer__replay:hover { opacity: 1; }
 .footer__sep { margin-inline: 0.5rem; color: color-mix(in srgb, var(--paper) 35%, transparent); }
 .footer__credit {
   color: color-mix(in srgb, var(--paper) 72%, transparent);
