@@ -11,7 +11,9 @@
 
   /* ----- Hero intro: "INTL Wellness" → drop INTL into a column → words ----- */
   (function heroIntro() {
-    var acronym = document.querySelector(".acronym");
+    // Scope to the hero — the intro overlay may contain its own INTL element,
+    // and a bare ".acronym" would match that first and leave the hero blank.
+    var acronym = document.querySelector(".hero .acronym") || document.querySelector(".acronym");
     if (!acronym) return;
 
     var letters = [].slice.call(acronym.querySelectorAll(".ac-letter"));
@@ -21,18 +23,18 @@
     var canAnimate = typeof acronym.animate === "function";
 
     /* ──────────────────────────────────────────────────────────────
-       THE "WHAT DO YOU SEE?" WORD SETS.
-       INTL is the question; each row cycles through possible answers,
-       drifting from the struggle → who you become, then loops.
-       Write WHOLE words here (each must start with I, N, T, L in order).
-       The big I/N/T/L is drawn separately, so the code renders only the
-       rest of each word — "Ignored" shows as I + "gnored". No duplicates.
+       POWER WORDS. Once the intro lands INTL on the page, the rows
+       cycle through these — every set positive and strong (the intro
+       already told the struggle → becoming story). Write WHOLE words
+       (each must start with I, N, T, L in order); the big I/N/T/L is
+       drawn separately, so only the rest renders ("Inspired" → I +
+       "nspired"). No duplicates.
        ────────────────────────────────────────────────────────────── */
     var SETS = [
-      ["Ignored",    "Numb",      "Tired",       "Lost"],
-      ["Insecure",   "Neglected", "Tense",       "Lonely"],
-      ["In pain",    "Numbed",    "Trapped",     "Lacking"],
-      ["Intentional","Nourished", "Transformed", "Limitless"]
+      ["Intentional", "Nourished", "Transformed", "Limitless"],
+      ["Inspired",    "Nurtured",  "Thriving",    "Lifted"],
+      ["Invincible",  "New",       "Tenacious",   "Loved"],
+      ["Ignited",     "Noble",     "Tranquil",    "Luminous"]
     ];
     // Render everything after the leading letter (which is shown by .ac-letter).
     function rest(word) { return word.slice(1); }
@@ -46,12 +48,70 @@
       if (wellness) wellness.style.display = "none";
     }
 
+    var willIntro = document.documentElement.classList.contains("will-intro");
+
     if (reduce || !canAnimate || !letters.length) {
       showFinal();
       return;
     }
 
     var EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+    var STAGGER = 130, HOLD = 3800;
+
+    // Reveal (or swap) one set of words across the four rows.
+    function revealSet(setIdx, swap, startDelay) {
+      words.forEach(function (el, i) {
+        if (swap) {
+          var out = el.animate(
+            [{ opacity: 1, transform: "translateY(0)" },
+             { opacity: 0, transform: "translateY(-0.28em)" }],
+            { duration: 360, delay: i * 70, easing: EASE, fill: "forwards" });
+          out.onfinish = function () {
+            el.textContent = rest(SETS[setIdx][i]);
+            el.animate(
+              [{ opacity: 0, transform: "translateY(0.3em)" },
+               { opacity: 1, transform: "translateY(0)" }],
+              { duration: 520, easing: EASE, fill: "both" });
+          };
+        } else {
+          el.animate(
+            [{ opacity: 0, transform: "translateX(-0.18em)" },
+             { opacity: 1, transform: "translateX(0)" }],
+            { duration: 780, delay: startDelay + i * STAGGER, easing: EASE, fill: "both" });
+        }
+      });
+    }
+
+    // Flood the first set in, then loop through all the power-word sets.
+    var cycleStarted = false;
+    function startWordCycle(firstDelay) {
+      if (cycleStarted) return; cycleStarted = true;
+      words.forEach(function (el, i) { el.textContent = rest(SETS[0][i]); });
+      revealSet(0, false, firstDelay);
+      var current = 0;
+      var SWAP_MS = 360 + 3 * 70 + 520;
+      function cycle() {
+        current = (current + 1) % SETS.length;
+        revealSet(current, true, 0);
+        setTimeout(cycle, SWAP_MS + HOLD);
+      }
+      setTimeout(cycle, firstDelay + 780 + 3 * STAGGER + HOLD);
+    }
+
+    // Show just the vertical INTL initials at rest (words stay hidden).
+    function showLettersOnly() {
+      letters.forEach(function (el) { el.style.opacity = "1"; el.style.transform = "none"; });
+      if (wellness) wellness.style.display = "none";
+    }
+
+    // Intro visit: the cinematic intro morphs its INTL onto these letters, then
+    // calls window.__heroStartWords() to begin the power-word cycle in place.
+    if (willIntro) {
+      showLettersOnly();
+      window.__heroStartWords = function () { startWordCycle(150); };
+      setTimeout(function () { startWordCycle(0); }, 30000); // safety if intro never calls back
+      return;
+    }
 
     function play() {
       // 1. Measure each letter's FINAL (stacked) position within the heading.
@@ -100,48 +160,8 @@
           { duration: 950, delay: 2150 + i * 90, easing: EASE, fill: "both" });
       });
 
-      // Phase D — the first set of words floods in, then the rows cycle
-      // through the remaining sets, resting on the last (the "answer").
-      var STAGGER = 130, HOLD = 3800, FIRST_AT = 3050;
-
-      // Begin showing the first (struggle) set, hidden until revealed.
-      words.forEach(function (el, i) { el.textContent = rest(SETS[0][i]); });
-
-      function revealSet(setIdx, swap, startDelay) {
-        words.forEach(function (el, i) {
-          if (swap) {
-            // fade the current word down, change text, rise the new one in
-            var out = el.animate(
-              [{ opacity: 1, transform: "translateY(0)" },
-               { opacity: 0, transform: "translateY(-0.28em)" }],
-              { duration: 360, delay: i * 70, easing: EASE, fill: "forwards" });
-            out.onfinish = function () {
-              el.textContent = rest(SETS[setIdx][i]);
-              el.animate(
-                [{ opacity: 0, transform: "translateY(0.3em)" },
-                 { opacity: 1, transform: "translateY(0)" }],
-                { duration: 520, easing: EASE, fill: "both" });
-            };
-          } else {
-            el.animate(
-              [{ opacity: 0, transform: "translateX(-0.18em)" },
-               { opacity: 1, transform: "translateX(0)" }],
-              { duration: 780, delay: startDelay + i * STAGGER, easing: EASE, fill: "both" });
-          }
-        });
-      }
-
-      revealSet(0, false, FIRST_AT);
-
-      // Loop through the sets forever — INTL is a question with many answers.
-      var current = 0;
-      var SWAP_MS = 360 + 3 * 70 + 520; // swap-out + stagger + swap-in
-      function cycle() {
-        current = (current + 1) % SETS.length;
-        revealSet(current, true, 0);
-        setTimeout(cycle, SWAP_MS + HOLD);
-      }
-      setTimeout(cycle, FIRST_AT + 780 + 3 * STAGGER + HOLD);
+      // Phase D — flood the first set in, then cycle the power words.
+      startWordCycle(3050);
     }
 
     // Measure only once the display font is ready (letter widths depend on it).

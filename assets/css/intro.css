@@ -1,0 +1,203 @@
+/* ============================================================
+   INTL Wellness — cinematic first-visit intro
+   An underwater scene: deep-water gradient, drifting light,
+   rising bubbles, vignette, letterbox. Plays once, skippable,
+   then hands the INTL letters to the hero as the site fades in.
+   ============================================================ */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 30%, #0c2a31 0%, #071c22 55%, #041216 100%);
+  opacity: 1;
+}
+.will-intro .intro { display: flex; }
+
+/* ---------------- underwater background layers ---------------- */
+.intro__bg {                          /* real water footage — the base layer */
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.85;
+  animation: introKen 26s ease-out both;
+}
+.intro__water {
+  position: absolute; inset: -8%;
+  background:
+    radial-gradient(60% 45% at 50% 18%, rgba(140,200,190,0.22), transparent 60%),
+    radial-gradient(80% 60% at 50% 120%, rgba(4,16,20,0.9), transparent 60%);
+  animation: introKen 26s ease-out both;
+}
+@keyframes introKen { from { transform: scale(1.02); } to { transform: scale(1.13); } }
+
+/* soft god-ray light shafts from above */
+.intro__rays {
+  position: absolute; inset: -30% -10% 0;
+  background:
+    linear-gradient(100deg, transparent 18%, rgba(170,215,205,0.10) 30%, transparent 42%,
+                    transparent 58%, rgba(170,215,205,0.07) 70%, transparent 82%);
+  filter: blur(6px);
+  mix-blend-mode: screen;
+  animation: introRays 22s ease-in-out infinite alternate;
+}
+@keyframes introRays {
+  from { transform: translateX(-4%) rotate(-1deg); opacity: 0.7; }
+  to   { transform: translateX(4%)  rotate(1deg);  opacity: 1; }
+}
+
+/* drifting caustic glow */
+.intro__glow {
+  position: absolute; inset: -20%;
+  background:
+    radial-gradient(34% 26% at 32% 30%, rgba(110,156,151,0.4), transparent 60%),
+    radial-gradient(30% 24% at 70% 58%, rgba(121,182,172,0.26), transparent 60%),
+    radial-gradient(42% 34% at 55% 82%, rgba(44,74,82,0.5), transparent 60%);
+  filter: blur(48px);
+  animation: introGlow 20s ease-in-out infinite alternate;
+}
+@keyframes introGlow {
+  from { transform: translate(-3%, -2%) scale(1.05); }
+  to   { transform: translate(3%, 2%) scale(1.15); }
+}
+
+/* rising bubbles (populated by JS) */
+.intro__bubbles { position: absolute; inset: 0; overflow: hidden; }
+.intro__bubbles .bubble {
+  position: absolute; bottom: -6vh; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,0.55), rgba(180,220,215,0.14) 58%, transparent 70%);
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.25);
+  opacity: 0;
+  animation: introRise linear infinite;
+}
+@keyframes introRise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  12%  { opacity: 0.7; }
+  88%  { opacity: 0.45; }
+  100% { transform: translateY(-112vh) translateX(var(--drift, 0)); opacity: 0; }
+}
+
+/* vignette + gentle top/bottom darkening for legibility */
+.intro__vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(125% 100% at 50% 42%, transparent 42%, rgba(2,10,14,0.88) 100%);
+}
+.intro__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(4,16,20,0.5) 0%, transparent 32%, transparent 68%, rgba(4,16,20,0.55) 100%);
+}
+
+/* cinematic letterbox bars */
+.intro__bar {
+  position: absolute; left: 0; right: 0; height: 0;
+  background: #000; z-index: 4;
+  transition: height .9s var(--ease, ease);
+}
+.intro__bar--top { top: 0; }
+.intro__bar--bottom { bottom: 0; }
+.intro.is-playing .intro__bar { height: 7vh; }
+.intro--out .intro__bar { height: 0; }
+
+/* ---------------- skip ---------------- */
+.intro__skip {
+  position: absolute; top: calc(7vh + 16px); right: 24px; z-index: 6;
+  font-family: var(--sans, sans-serif);
+  font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(234,242,239,0.7);
+  border: 1px solid rgba(234,242,239,0.26);
+  border-radius: 100px; padding: 0.5rem 1.1rem;
+  transition: color .3s, border-color .3s, background-color .3s, top .9s var(--ease, ease);
+}
+.intro__skip:hover { color: #fff; border-color: rgba(234,242,239,0.6); background: rgba(234,242,239,0.06); }
+
+/* ---------------- stage ---------------- */
+.intro__stage {
+  position: relative; z-index: 3;
+  width: 100%; max-width: 1000px;
+  padding: 0 var(--gutter, 1.5rem);
+  text-align: center;
+}
+
+/* Begin gate */
+.intro__gate {
+  display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
+  transition: opacity .7s var(--ease, ease), transform .7s var(--ease, ease);
+}
+.intro__gate-mark {
+  font-family: var(--display, Georgia, serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 12vw, 7rem);
+  letter-spacing: 0.14em;
+  color: #EAF2EF;
+  padding-left: 0.14em;
+  text-shadow: 0 0 50px rgba(121,182,172,0.35);
+}
+.intro__begin {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--sea-ink, #07171b);
+  background: #EAF2EF;
+  border-radius: 100px; padding: 0.95rem 2.6rem;
+  transition: transform .35s var(--ease, ease), background-color .35s, box-shadow .35s;
+  box-shadow: 0 10px 40px -12px rgba(121,182,172,0.5);
+}
+.intro__begin:hover { transform: translateY(-2px); background: #fff; }
+.intro__hint { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(234,242,239,0.48); }
+
+/* Narration */
+.intro__narr {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(1.8rem, 6vh, 4rem);
+  opacity: 0; pointer-events: none;
+}
+.intro.is-playing .intro__gate { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+.intro.is-playing .intro__narr { opacity: 1; }
+
+/* INTL — horizontal wordmark, present the whole intro */
+.intro__wordmark {
+  font-family: var(--display, Georgia, serif);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 15vw, 10rem);
+  line-height: 1.12;                  /* match .acronym so the morph lands true */
+  letter-spacing: 0.16em;
+  color: #EAF2EF;
+  padding-left: 0.16em;              /* optically centre the tracked letters */
+  text-shadow: 0 0 60px rgba(121,182,172,0.5), 0 4px 30px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 1.4s var(--ease, ease), transform 1.4s var(--ease, ease), letter-spacing 1.6s var(--ease, ease);
+}
+.intro.is-playing .intro__wordmark {
+  opacity: 1; transform: none; letter-spacing: 0.24em;
+}
+.intro__wordmark span { display: inline-block; will-change: transform; }
+
+/* Captions — slow, soft, blur-in */
+.intro__cap {
+  min-height: 1.4em;
+  font-family: var(--display, Georgia, serif);
+  font-weight: 300; font-style: italic;
+  font-size: clamp(1.4rem, 3.6vw, 2.4rem);
+  line-height: 1.3; letter-spacing: 0.005em;
+  color: #EAF2EF; text-shadow: 0 2px 40px rgba(0,0,0,0.55);
+  max-width: 24ch; margin: 0 auto;
+  opacity: 0; filter: blur(7px); transform: translateY(10px);
+  transition: opacity .9s var(--ease, ease), filter .9s var(--ease, ease), transform .9s var(--ease, ease);
+}
+.intro__cap.show { opacity: 1; filter: blur(0); transform: none; }
+
+/* handoff fade */
+.intro--out .intro__cap,
+.intro--out .intro__skip,
+.intro--out .intro__scrim,
+.intro--out .intro__vignette,
+.intro--out .intro__rays,
+.intro--out .intro__glow,
+.intro--out .intro__bubbles,
+.intro--out .intro__bg { opacity: 0; transition: opacity 2.2s var(--ease, ease); }
+.intro--out .intro__bar { transition: height 2s var(--ease, ease); }
+
+@media (prefers-reduced-motion: reduce) { .intro { display: none !important; } }

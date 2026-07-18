@@ -4,6 +4,27 @@
   <!-- Mark JS as available so the hero can hide its letters before animating
        (no-JS users skip the intro and see the final layout). -->
   <script>document.documentElement.className += " js";</script>
+  <!-- Decide (before paint) whether the cinematic intro should play: only on
+       first visit, and never for reduced-motion users. A dead-man timer tears
+       the overlay down if intro.js ever fails to load. -->
+  <script>
+    (function () {
+      try {
+        var seen = localStorage.getItem("intl_intro_seen");
+        var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // Add ?intro to the URL to force-play the intro (for previews/demos).
+        var force = /[?&]intro\b/.test(location.search);
+        if (force || (!seen && !reduce)) {
+          document.documentElement.className += " will-intro";
+          window.__introDead = setTimeout(function () {
+            document.documentElement.className = document.documentElement.className.replace(" will-intro", "");
+            var i = document.getElementById("intro"); if (i) i.style.display = "none";
+            if (document.body) document.body.style.overflow = "";
+          }, 8000);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>INTL Wellness · A Coaching Experience for the Whole Self</title>
@@ -20,10 +41,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/intro.css" />
 </head>
 <body>
   <!-- Film-grain texture overlay (sits above everything, pointer-events none) -->
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- ─────────────────  CINEMATIC INTRO (first visit only)  ───────────────── -->
+  <div class="intro" id="intro" role="dialog" aria-label="Intro">
+    <!-- Underwater scene. A real water clip can go in .intro__bg later;
+         the procedural layers below carry it until then. -->
+    <video class="intro__bg" id="introBg" autoplay muted loop playsinline preload="auto">
+      <source src="assets/video/water.mp4" type="video/mp4" />
+    </video>
+    <div class="intro__water" aria-hidden="true"></div>
+    <div class="intro__rays" aria-hidden="true"></div>
+    <div class="intro__glow" aria-hidden="true"></div>
+    <div class="intro__bubbles" id="introBubbles" aria-hidden="true"></div>
+    <div class="intro__vignette" aria-hidden="true"></div>
+    <div class="intro__scrim" aria-hidden="true"></div>
+    <div class="intro__bar intro__bar--top" aria-hidden="true"></div>
+    <div class="intro__bar intro__bar--bottom" aria-hidden="true"></div>
+
+    <button class="intro__skip" id="introSkip" type="button">Skip</button>
+
+    <div class="intro__stage">
+      <!-- Begin gate (a click is required for the voiceover to play) -->
+      <div class="intro__gate" id="introGate">
+        <div class="intro__gate-mark">INTL</div>
+        <button class="intro__begin" id="introBegin" type="button">Begin</button>
+        <p class="intro__hint">Sound on &middot; about 25 seconds</p>
+      </div>
+
+      <!-- Narration: INTL stays horizontal the whole time; captions read along -->
+      <div class="intro__narr" aria-hidden="true">
+        <div class="intro__wordmark" id="introWordmark"><span>I</span><span>N</span><span>T</span><span>L</span></div>
+        <p class="intro__cap" id="introCap"></p>
+      </div>
+    </div>
+
+    <audio id="introAudio" preload="auto">
+      <source src="assets/audio/intro.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="introMusic" preload="auto" loop>
+      <source src="assets/audio/intro-ambient.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
 
   <!-- ───────────────────────────  NAV  ─────────────────────────── -->
   <header class="nav" id="nav">
@@ -357,6 +420,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/intro.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
