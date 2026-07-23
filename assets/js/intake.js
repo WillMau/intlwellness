@@ -86,55 +86,12 @@
 
   /* ----- Submit ----- */
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!validateStep()) return;
-
-    btnSubmit.disabled = true;
-    var original = btnSubmit.textContent;
+    // Validate the final step, then submit natively so FormSubmit can show its
+    // captcha and redirect to the branded thank-you page.
+    if (!validateStep()) { e.preventDefault(); return; }
     btnSubmit.textContent = "Sending…";
-
-    fetch(form.action, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: new FormData(form)
-    })
-      .then(function (res) {
-        if (res.ok) { showDone(); }
-        else {
-          return res.json().then(function (d) {
-            var msg = d && d.errors && d.errors.length
-              ? d.errors.map(function (x) { return x.message; }).join(", ")
-              : "Something went wrong. Please try again.";
-            throw new Error(msg);
-          });
-        }
-      })
-      .catch(function (err) {
-        status.textContent = err && err.message ? err.message : "We couldn't reach the server. Please try again.";
-        status.classList.add("is-error");
-        btnSubmit.disabled = false;
-        btnSubmit.textContent = original;
-      });
+    // no preventDefault → native submit proceeds (captcha → thanks page)
   });
-
-  function showDone() {
-    var name = (form.querySelector('[name="First name"]') || {}).value || "";
-    form.innerHTML =
-      '<div class="intake-done">' +
-      '<h2>Thank you' + (name ? ", " + escapeHtml(name) : "") + ".</h2>" +
-      "<p>Your assessment is in. This is the beginning of the conversation — " +
-      "we'll review what you shared and reach out to map your first steps together.</p>" +
-      '<a href="index.html" class="btn btn--solid">Back to home</a>' +
-      "</div>";
-    document.getElementById("progress").style.display = "none";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
 
   render();
 })();

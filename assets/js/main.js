@@ -244,54 +244,21 @@
   var status = document.getElementById("formStatus");
   if (form) {
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      status.className = "form__status";
-
+      // Validate client-side, then let the browser POST natively so FormSubmit
+      // can show its captcha and redirect to the branded thank-you page.
+      if (status) status.className = "form__status";
       if (!form.checkValidity()) {
-        status.textContent = "Please add your name and a valid email.";
-        status.classList.add("is-error");
+        e.preventDefault();
+        if (status) {
+          status.textContent = "Please add your name and a valid email.";
+          status.classList.add("is-error");
+        }
         form.reportValidity();
         return;
       }
-
       var btn = form.querySelector("button[type=submit]");
-      var original = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = "Sending…";
-
-      // ── Submit to the form endpoint (FormSubmit, set in the HTML action) ──
-      fetch(form.action, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form)
-      })
-        .then(function (res) {
-          if (res.ok) {
-            form.reset();
-            status.textContent =
-              "Thank you. You're on the founding waitlist, and we'll be in touch as spots open.";
-            status.classList.add("is-success");
-          } else {
-            return res.json().then(function (data) {
-              var msg =
-                data && data.errors && data.errors.length
-                  ? data.errors.map(function (e) { return e.message; }).join(", ")
-                  : "Something went wrong. Please try again.";
-              throw new Error(msg);
-            });
-          }
-        })
-        .catch(function (err) {
-          status.textContent =
-            err && err.message
-              ? err.message
-              : "We couldn't reach the server. Please try again in a moment.";
-          status.classList.add("is-error");
-        })
-        .finally(function () {
-          btn.disabled = false;
-          btn.textContent = original;
-        });
+      if (btn) btn.textContent = "Sending…";
+      // no preventDefault → native submit proceeds (captcha → thanks page)
     });
   }
 })();
