@@ -159,7 +159,16 @@
         <a href="#membership">Membership</a>
       </nav>
 
-      <a href="#waitlist" class="btn btn--pill nav__cta">Join the waitlist</a>
+      <div class="nav__actions">
+        <a href="/?intro" class="nav__play" data-replay-intro title="Watch the intro (about 2 minutes)">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M10 8.3v7.4l5.9-3.7z" fill="currentColor"/>
+          </svg>
+          <span class="nav__play-text"><span class="nav__play-verb">Watch </span>intro</span>
+        </a>
+        <a href="#waitlist" class="btn btn--pill nav__cta">Join the waitlist</a>
+      </div>
 
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
@@ -462,7 +471,7 @@
         <a href="#membership">Membership</a>
         <a href="intake.html">Assessment</a>
         <a href="#waitlist">Waitlist</a>
-        <a href="/?intro" id="replayIntro" class="footer__replay">↻ Replay intro</a>
+        <a href="/?intro" class="footer__replay" data-replay-intro>↻ Replay intro</a>
       </nav>
       <div class="footer__meta">
         <p>© <span id="year"></span> INTL Wellness. All rights reserved.
