@@ -22,14 +22,14 @@
 .intro__bg {                          /* real water footage — the base layer */
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; opacity: 0.85;
-  animation: introKen 26s ease-out both;
+  animation: introKen 130s ease-out both;
 }
 .intro__water {
   position: absolute; inset: -8%;
   background:
     radial-gradient(60% 45% at 50% 18%, rgba(140,200,190,0.22), transparent 60%),
     radial-gradient(80% 60% at 50% 120%, rgba(4,16,20,0.9), transparent 60%);
-  animation: introKen 26s ease-out both;
+  animation: introKen 130s ease-out both;
 }
 @keyframes introKen { from { transform: scale(1.02); } to { transform: scale(1.13); } }
 
@@ -119,6 +119,14 @@
   padding: 0 var(--gutter, 1.5rem);
   text-align: center;
 }
+/* soft dark pool behind the wordmark + captions — keeps the light type legible
+   when the water footage runs pale */
+.intro__stage::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(1150px, 150vw); height: min(640px, 90vh);
+  background: radial-gradient(closest-side, rgba(3,14,18,0.5), rgba(3,14,18,0.3) 55%, transparent 100%);
+}
 
 /* Begin gate */
 .intro__gate {
@@ -144,7 +152,7 @@
   box-shadow: 0 10px 40px -12px rgba(121,182,172,0.5);
 }
 .intro__begin:hover { transform: translateY(-2px); background: #fff; }
-.intro__hint { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(234,242,239,0.48); }
+.intro__hint { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(234,242,239,0.78); text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 
 /* Narration */
 .intro__narr {
@@ -173,7 +181,17 @@
 .intro.is-playing .intro__wordmark {
   opacity: 1; transform: none; letter-spacing: 0.24em;
 }
-.intro__wordmark span { display: inline-block; will-change: transform; }
+.intro__wordmark span {
+  display: inline-block; will-change: transform;
+  transition: color 1.4s var(--ease, ease), text-shadow 1.4s var(--ease, ease), opacity 1.4s var(--ease, ease);
+}
+/* lit as the narrator names it: intention, nourished, trust, love. Once the
+   first lights, the rest dim so INTL visibly builds I → IN → INT → INTL. */
+.intro__wordmark.is-lighting span:not(.lit) { opacity: 0.3; }
+.intro__wordmark span.lit {
+  color: #fff;
+  text-shadow: 0 0 24px rgba(170,230,218,0.95), 0 0 80px rgba(121,182,172,0.85), 0 4px 30px rgba(0,0,0,0.5);
+}
 
 /* Captions — slow, soft, blur-in */
 .intro__cap {
@@ -182,7 +200,7 @@
   font-weight: 300; font-style: italic;
   font-size: clamp(1.4rem, 3.6vw, 2.4rem);
   line-height: 1.3; letter-spacing: 0.005em;
-  color: #EAF2EF; text-shadow: 0 2px 40px rgba(0,0,0,0.55);
+  color: #EAF2EF; text-shadow: 0 1px 3px rgba(0,0,0,0.45), 0 2px 40px rgba(0,0,0,0.6);
   max-width: 24ch; margin: 0 auto;
   opacity: 0; filter: blur(7px); transform: translateY(10px);
   transition: opacity .9s var(--ease, ease), filter .9s var(--ease, ease), transform .9s var(--ease, ease);
@@ -191,6 +209,7 @@
 
 /* handoff fade */
 .intro--out .intro__cap,
+.intro--out .intro__stage::before,
 .intro--out .intro__skip,
 .intro--out .intro__scrim,
 .intro--out .intro__vignette,

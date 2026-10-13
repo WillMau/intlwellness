@@ -31,9 +31,9 @@
        "nspired"). No duplicates.
        ────────────────────────────────────────────────────────────── */
     var SETS = [
-      ["Intentional", "Nourished", "Transformed", "Limitless"],
+      ["Intentional", "Nourished", "Trusting",    "Loved"],
       ["Inspired",    "Nurtured",  "Thriving",    "Lifted"],
-      ["Invincible",  "New",       "Tenacious",   "Loved"],
+      ["Invincible",  "New",       "Tenacious",   "Limitless"],
       ["Ignited",     "Noble",     "Tranquil",    "Luminous"]
     ];
     // Render everything after the leading letter (which is shown by .ac-letter).
@@ -109,7 +109,8 @@
     if (willIntro) {
       showLettersOnly();
       window.__heroStartWords = function () { startWordCycle(150); };
-      setTimeout(function () { startWordCycle(0); }, 30000); // safety if intro never calls back
+      // Safety if intro.js never loads; intro.js cancels this as soon as it runs.
+      window.__heroSafety = setTimeout(function () { startWordCycle(0); }, 30000);
       return;
     }
 
@@ -234,7 +235,12 @@
       },
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
-    revealEls.forEach(function (el) { io.observe(el); });
+    revealEls.forEach(function (el) {
+      // The hero is on screen at load; on short laptop screens (≤ ~800px tall) its
+      // buttons sit in the observer's excluded bottom margin and would stay hidden.
+      if (el.closest(".hero")) el.classList.add("is-visible");
+      else io.observe(el);
+    });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
